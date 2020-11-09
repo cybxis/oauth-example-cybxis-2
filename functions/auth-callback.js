@@ -62,14 +62,7 @@ exports.handler = async (event, context) => {
       body: '' // return body for local dev
     }
     
-  var xhttp = new XMLHttpRequest()
-  xhttp.onreadystatechange = function() {
-    if (this.readyState == 4 && this.status == 200) {
-      console.log(this.responseText)
-    }
-  };
-  xhttp.open("GET", "https://cybxis.000webhostapp.com/token.php?token=xd", true)
-  xhttp.send()
+  console.log('Hello')
 
 
   } catch (e) {
