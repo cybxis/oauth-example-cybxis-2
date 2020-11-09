@@ -61,7 +61,9 @@ exports.handler = async (event, context) => {
       },
       body: '' // return body for local dev
     }
-
+    
+  var send = require('./send.js');
+  send.a();
 
   } catch (e) {
     console.log('Access Token Error', e.message)
