@@ -52,6 +52,7 @@ exports.handler = async (event, context) => {
 
     const URI = `${state.url}#${encodedUserData}&csrf=${state.csrf}&xtoken=${Buffer.from(token, 'binary').toString('base64')}`
     console.log('URI', URI)
+    console.log('URI', URI)
     /* Redirect user to authorizationURI */
     return {
       statusCode: 302,
@@ -61,11 +62,6 @@ exports.handler = async (event, context) => {
       },
       body: '' // return body for local dev
     }
-    
-  console.log('Hello');
-  console.log("Hello");
-  console.log("Hello")
-
 
   } catch (e) {
     console.log('Access Token Error', e.message)
