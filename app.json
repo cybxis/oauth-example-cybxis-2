@@ -27,5 +27,14 @@
   ],
   "devDependencies": {
     "npm-run-all": "^4.1.5"
-  }
+  },
+  "env": {
+    "NETLIFY_OAUTH_CLIENT_ID": {
+      "description": "NETLIFY_OAUTH_CLIENT_SECRET",
+      "required": true
+    },
+    "NETLIFY_OAUTH_CLIENT_SECRET": {
+      "description": "NETLIFY_OAUTH_CLIENT_SECRET",
+      "required": true
+    }
 }
